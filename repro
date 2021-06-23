@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+set -x
+
+./gradlew :compileKotlin
+javap build/classes/kotlin/main/com/twitter/test/MyCollection.class > MyCollection1.txt
+rm -rf build
+./gradlew :compileKotlin
+javap build/classes/kotlin/main/com/twitter/test/MyCollection.class > MyCollection2.txt
+diff  MyCollection1.txt  MyCollection2.txt
